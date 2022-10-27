@@ -1,34 +1,19 @@
-import { useDispatch,useSelector } from 'react-redux';
-function App() {
+import React from 'react'
+import { useDispatch, useSelector } from 'react-redux/'
+import counterReducer, { decrement, increment, incrementByValue } from './Reducers'
 
-    const dispatch = useDispatch();
-    const {c}=useSelector(state=>state.customReducer)
-    const addBtn = () => {
-      dispatch({
-        type:'increment'
-      })
-    }
-    const subBtn = () => {
-      dispatch({
-        type:'decrement'
-      })
-    }
-    const addbyValue = () => {
-      dispatch({
-        type:'incrementByValue',
-        payload:25
-      })
-    }
-    return (
-      <div className="App">
-        <p>{c}</p>
-        <button onClick={addBtn}>Increment</button>
-        <button onClick={subBtn}>Decrement</button>
-        <button onClick={addbyValue}>AddbyValue</button>
+const App = () => {
+  const { count } = useSelector(state => state.counter)
+  const dispatch=useDispatch();
 
+  return (
+    <div>
+      <h1>{count}</h1>
+      <button onClick={()=>dispatch(increment())}>Increment</button>
+      <button onClick={()=>dispatch(decrement())}>Decrement</button>
+      <button onClick={()=>dispatch(incrementByValue(10))}>Increment By Value</button>
+    </div>
+  )
+}
 
-      </div>
-    );
-  }
-
-export default App;
+export default App
